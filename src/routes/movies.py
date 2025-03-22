@@ -41,12 +41,15 @@ async def get_movies(
         prev_page = None
     else:
         prev_page = f"/theater/movies/?page={page - 1}&per_page={per_page}"
+    if page == total_pages:
+        next_page = None
+    else:
+        next_page = f"/theater/movies/?page={page + 1}&per_page={per_page}"
 
     response = MovieListResponseSchema(
         movies=movies,
         prev_page=prev_page,
-        next_page=f"/theater/movies/?page={page + 1}&per_page={per_page}",
-        # next_page=next_page,
+        next_page=next_page,
         total_pages=total_pages,
         total_items=total_items
     )
